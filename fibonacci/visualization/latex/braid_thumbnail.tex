@@ -1,0 +1,70 @@
+\documentclass[border=1pt]{standalone}
+
+\usepackage{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{braids}
+
+% Python defines these commands before inputting this file.  The defaults make
+% the source independently compilable for a quick smoke test.
+\providecommand{\BraidNumberOfStrands}{4}
+\providecommand{\BraidWord}{s2}
+\providecommand{\BraidBorderHeight}{0.42cm}
+
+\ifdefined\DiagramDarkMode
+  \definecolor{diagramInk}{RGB}{255,255,255}
+\else
+  \definecolor{diagramInk}{RGB}{0,0,0}
+\fi
+
+\makeatletter
+
+\def\BraidThumbnailInverseMarker{i}
+\def\BraidThumbnailParseGenerator s#1#2\relax{%
+  \def\BraidThumbnailFirstToken{#1}%
+  \ifx\BraidThumbnailFirstToken\BraidThumbnailInverseMarker
+    \xdef\BraidThumbnailParsedWord{%
+      \BraidThumbnailParsedWord\space s_{#2}^{-1}}%
+  \else
+    \xdef\BraidThumbnailParsedWord{%
+      \BraidThumbnailParsedWord\space s_{#1#2}}%
+  \fi
+}
+
+\newcommand{\BraidThumbnail}[2]{%
+  \begingroup
+  \gdef\BraidThumbnailParsedWord{}%
+  \edef\BraidThumbnailInputWord{#2}%
+  \ifx\BraidThumbnailInputWord\@empty
+  \else
+    \foreach \BraidThumbnailGenerator in {#2}{%
+      \expandafter\BraidThumbnailParseGenerator
+        \BraidThumbnailGenerator\relax
+    }%
+  \fi
+
+  \begin{tikzpicture}
+    \edef\BraidThumbnailDraw{%
+      \noexpand\pic[
+        draw=diagramInk,
+        line width=0.95pt,
+        braid/number of strands=#1,
+        braid/width=0.34cm,
+        braid/crossing height=0.34cm,
+        braid/border height=\BraidBorderHeight,
+        braid/control factor=0.52,
+        braid/nudge factor=0.035,
+        braid/gap=0.10
+      ] {braid={\BraidThumbnailParsedWord}};%
+    }%
+    \BraidThumbnailDraw
+  \end{tikzpicture}%
+  \endgroup
+}
+
+\makeatother
+
+\begin{document}
+\edef\RenderBraidThumbnail{%
+  \noexpand\BraidThumbnail{\BraidNumberOfStrands}{\BraidWord}}
+\RenderBraidThumbnail
+\end{document}

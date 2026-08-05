@@ -1,0 +1,74 @@
+{
+  "best": {
+    "stats": {
+      "seed": 0,
+      "two_qubit_gates": 71,
+      "depth": 240,
+      "one_qubit_gates": 259
+    },
+    "mapping": [
+      [
+        0,
+        128
+      ],
+      [
+        1,
+        127
+      ],
+      [
+        2,
+        126
+      ],
+      [
+        3,
+        137
+      ]
+    ]
+  },
+  "worst": {
+    "stats": {
+      "seed": 0,
+      "two_qubit_gates": 71,
+      "depth": 240,
+      "one_qubit_gates": 259
+    },
+    "mapping": [
+      [
+        0,
+        128
+      ],
+      [
+        1,
+        127
+      ],
+      [
+        2,
+        126
+      ],
+      [
+        3,
+        137
+      ]
+    ]
+  },
+  "seeds_tried": 200,
+  "extra_metadata": {
+    "model_name": "topological_code",
+    "backend": "ibm_marrakesh",
+    "circuit_label": "s2_s1_s2 2 pairs",
+    "layout": "manual",
+    "optimization_level": 3,
+    "transpiler_seeds": {
+      "type": "range",
+      "start": 0,
+      "stop": 200,
+      "step": 1
+    },
+    "manual_initial_layout": [
+      126,
+      127,
+      109,
+      137
+    ]
+  }
+}
