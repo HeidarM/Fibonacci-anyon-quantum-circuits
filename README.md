@@ -650,7 +650,7 @@ The irreducible representations of the tube algebra classify the bulk anyons:
 
 $$
 Z(\mathcal C)\simeq
-\mathrm{Rep}\!\left(\mathrm{Tube}(\mathcal C)\right).
+\mathrm{Rep}\left(\mathrm{Tube}(\mathcal C)\right).
 $$
 
 Its minimal central idempotents act as projectors onto definite topological
