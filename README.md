@@ -146,7 +146,7 @@ We use these categorical gates to construct two different circuit realizations o
 #### Single-polygon ground state
 
 The polygon ground state is one weighted loop $|\Omega_n\rangle = \frac{|0\rangle^{\otimes n}+\varphi|1\rangle^{\otimes n}}{\sqrt{1+\varphi^2}}.$
-This state can be created from $|0\rangle^{\otimes n}$, by applying $U_s=\frac{1}{\sqrt{1+\varphi^2}}\begin{pmatrix}1&\varphi\\ \varphi&-1\end{pmatrix}$ to one seed edge, followed by a CX fan around the other polygon edges.
+This state can be created from $|0\rangle^{\otimes n}$, by applying $`U_s=\frac{1}{\sqrt{1+\varphi^2}}\begin{pmatrix}1&\varphi\\ \varphi&-1\end{pmatrix}`$ to one seed edge, followed by a CX fan around the other polygon edges.
 
 #### Three-plaquette ground state
 
@@ -232,6 +232,7 @@ The forgetful functor $Z(\mathcal C)\to\mathcal C$ drops the excitation's
 half-braiding data and keeps its ordinary string content. In general,
 $\mathrm{For}(\mu)\cong\bigoplus_{a\in\mathcal C} n_{\mu,a}\,a$, where $n_{\mu,a}$ counts how often the string $a$ occurs. For Fibonacci, this
 becomes
+
 $$
 (1,1)\mapsto1,\qquad
 (1,\tau)\mapsto\tau,\qquad
