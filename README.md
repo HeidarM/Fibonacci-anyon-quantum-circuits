@@ -91,10 +91,7 @@ H=-\sum_v Q_v-\sum_p B_p,
 $$
 
 Here $Q_v$ enforces the fusion rule at each vertex and $B_p$ inserts a
-quantum-dimension-weighted loop around a plaquette. For Fibonacci strings $d_\tau=\varphi=\frac{1+\sqrt5}{2}$, $\mathcal D_{\mathrm{Fib}}^2=1+\varphi^2$ and $
-B_p=
-\frac{B_p^1+\varphi B_p^\tau}{\mathcal D_{\mathrm{Fib}}^2}.
-$
+quantum-dimension-weighted loop around a plaquette. For Fibonacci strings $d_\tau=\varphi=\frac{1+\sqrt5}{2}$, $\mathcal D_{\mathrm{Fib}}^2=1+\varphi^2$ and $B_p=\frac{B_p^1+\varphi B_p^\tau}{\mathcal D_{\mathrm{Fib}}^2}$.
 
 String-net states can be prepared and manipulated using local recoupling moves
 determined by $\mathcal C$. An $F$-move reassociates a fusion tree. Since
@@ -148,15 +145,8 @@ We use these categorical gates to construct two different circuit realizations o
 
 #### Single-polygon ground state
 
-The polygon ground state is one weighted loop $|\Omega_n\rangle =
-\frac{|0\rangle^{\otimes n}+\varphi|1\rangle^{\otimes n}}
-{\sqrt{1+\varphi^2}}.$
-This state can be created from $|0\rangle^{\otimes n}$, by
-applying $
-U_s=
-\frac{1}{\sqrt{1+\varphi^2}}
-\begin{pmatrix}1&\varphi\\ \varphi&-1\end{pmatrix}
-$ to one seed edge, followed by a CX fan around the other polygon edges.
+The polygon ground state is one weighted loop $|\Omega_n\rangle = \frac{|0\rangle^{\otimes n}+\varphi|1\rangle^{\otimes n}}{\sqrt{1+\varphi^2}}.$
+This state can be created from $|0\rangle^{\otimes n}$, by applying $U_s=\frac{1}{\sqrt{1+\varphi^2}}\begin{pmatrix}1&\varphi\\ \varphi&-1\end{pmatrix}$ to one seed edge, followed by a CX fan around the other polygon edges.
 
 #### Three-plaquette ground state
 
@@ -208,19 +198,14 @@ quantum gate. Instead, the circuit implements a unitary $U_\tau$ on the lattice
 using two auxiliary fusion qubits: create a $\tau$ pair, carry one excitation
 around the plaquette, and fuse the pair again. Projecting the auxiliary qubits
 back to $|00\rangle$ selects the block
-$K_\tau = \bigl(I\otimes\langle00|\bigr)U_\tau
-\bigl(I\otimes|00\rangle\bigr) = \frac{B_p^\tau}{\varphi}.$
+$K_\tau = \bigl(I\otimes\langle00|\bigr)U_\tau\bigl(I\otimes|00\rangle\bigr) = \frac{B_p^\tau}{\varphi}.$
 
 The remaining auxiliary branches retain the complementary fusion information,
 making the enlarged operation reversible. With the auxiliary qubits initialized
 in $|00\rangle$, the Hadamard test in
 [`measure_Bp_sampling`](fibonacci/constraints/plaquette.py) measures the real
-overlap $\langle\psi,00|U_\tau|\psi,00\rangle
-=\langle\psi|K_\tau|\psi\rangle
-=\langle B_p^\tau\rangle/\varphi$, from which the plaquette expectation is
-reconstructed as
-$\langle B_p\rangle = \frac{1+\varphi\langle B_p^\tau\rangle}{1+\varphi^2}
-= \frac{1+\varphi^2\langle K_\tau\rangle}{1+\varphi^2}.$ The operator $B_p$
+overlap $\langle\psi,00|U_\tau|\psi,00\rangle=\langle\psi|K_\tau|\psi\rangle=\langle B_p^\tau\rangle/\varphi$, from which the plaquette expectation is
+reconstructed as $\langle B_p\rangle = \frac{1+\varphi\langle B_p^\tau\rangle}{1+\varphi^2}=\frac{1+\varphi^2\langle K_\tau\rangle}{1+\varphi^2}.$ The operator $B_p$
 is a projector because the fusion rule $\tau\times\tau=1\oplus\tau$ implies
 $(B_p^\tau)^2=I+B_p^\tau$.
 
@@ -245,11 +230,7 @@ the forgetful functor and the half-braiding.
 
 The forgetful functor $Z(\mathcal C)\to\mathcal C$ drops the excitation's
 half-braiding data and keeps its ordinary string content. In general,
-$
-\operatorname{For}(\mu)
-\cong
-\bigoplus_{a\in\mathcal C} n_{\mu,a}\,a,
-$ where $n_{\mu,a}$ counts how often the string $a$ occurs. For Fibonacci, this
+$\mathrm{For}(\mu)\cong\bigoplus_{a\in\mathcal C} n_{\mu,a}\,a$, where $n_{\mu,a}$ counts how often the string $a$ occurs. For Fibonacci, this
 becomes
 $$
 (1,1)\mapsto1,\qquad
@@ -485,17 +466,7 @@ Creating two vacuum pairs gives four $\tau$ excitations with total charge $1$.
 Their two-dimensional fusion space encodes one logical qubit nonlocally across
 the four anyons. In the pairwise fusion basis, its logical states are
 
-$$
-|0_L\rangle
-=
-\left|\Big((\tau_1\times\tau_2)_1
-\times(\tau_3\times\tau_4)_1\Big)_1\right\rangle,
-\qquad
-|1_L\rangle
-=
-\left|\Big((\tau_1\times\tau_2)_\tau
-\times(\tau_3\times\tau_4)_\tau\Big)_1\right\rangle.
-$$
+$$|0_L\rangle=\left|\Big((\tau_1\times\tau_2)_1\times(\tau_3\times\tau_4)_1\Big)_1\right\rangle,\qquad |1_L\rangle=\left|\Big((\tau_1\times\tau_2)_\tau\times(\tau_3\times\tau_4)_\tau\Big)_1\right\rangle.$$
 
 Or, graphically:
 
@@ -528,13 +499,7 @@ $\tau_2$ and $\tau_3$ fuse first, the $R$-move exchanges them, and the inverse
 $F$-move returns to the measurement tree. Hence
 $\sigma_2=F^{-1}RF$ and
 
-$$
-\sigma_2|0_L\rangle
-=
-\varphi^{-1}e^{4\pi i/5}|0_L\rangle
-+
-\varphi^{-1/2}e^{-3\pi i/5}|1_L\rangle.
-$$
+$$\sigma_2|0_L\rangle=\varphi^{-1}e^{4\pi i/5}|0_L\rangle+\varphi^{-1/2}e^{-3\pi i/5}|1_L\rangle.$$
 
 For one middle exchange, fusion is therefore expected to give
 
@@ -673,7 +638,7 @@ consistently through every string label.
 
 The center can be computed from the so-called tube algebra.
 Physically,
-$\operatorname{Tube}(\mathcal C)$ is the algebra of local string-net operators
+$\mathrm{Tube}(\mathcal C)$ is the algebra of local string-net operators
 supported on an annulus surrounding a puncture. These operators probe and
 manipulate the topological charge enclosed by the annulus without accessing
 its interior. Graphically, a basis element is a fusion-allowed labelled
@@ -685,7 +650,7 @@ The irreducible representations of the tube algebra classify the bulk anyons:
 
 $$
 Z(\mathcal C)\simeq
-\operatorname{Rep}\!\left(\operatorname{Tube}(\mathcal C)\right).
+\mathrm{Rep}\!\left(\mathrm{Tube}(\mathcal C)\right).
 $$
 
 Its minimal central idempotents act as projectors onto definite topological
@@ -694,7 +659,7 @@ the annulus.
 
 The notebook
 [`Tube_Algebra_Fibonacci.nb`](fibonacci/Mathematica/Tube_Algebra_Fibonacci.nb)
-provides tools for exact calculations in $\operatorname{Tube}(\mathcal C)$ and
+provides tools for exact calculations in $\mathrm{Tube}(\mathcal C)$ and
 for visualizing its elements. The functions `TubeRepresentation` and
 `TubeRepresentation3D` render the same element as a two-dimensional annular
 diagram and as a three-dimensional cylinder, respectively. For example, the
@@ -705,7 +670,7 @@ Dehn-twist element appears as
        width="350"/>
 </p>
 
-Products in $\operatorname{Tube}(\mathcal C)$ also have a direct graphical
+Products in $\mathrm{Tube}(\mathcal C)$ also have a direct graphical
 interpretation: compatible cylinders are stacked, and the joined boundary is
 reduced using $F$-moves:
 
