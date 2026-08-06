@@ -1,0 +1,4 @@
+# Mathematica files have large outputs in the notebook files
+# Do not want to count them as code for language statistics
+fibonacci/Mathematica/** -linguist-detectable
+cluster_state_SPT_phase_transition/Mathematica/** -linguist-detectable
