@@ -1,12 +1,13 @@
 # Quantum Algorithms and Circuits for Topological Phases
 
-Quantum-circuit studies of topological phases and anyonic systems, particularly
-Fibonacci anyons: preparing string-net ground states, creating and braiding
-excitations, and executing arbitrary braid words as logical gates. Together,
-these operations effectively emulate a topological quantum computer on
-conventional gate-based hardware. The circuit constructions are validated using
-Qiskit simulations and symbolic derivations in Mathematica, and optimized
-for IBM Quantum systems with hardware-aware transpilation.
+This repository implements quantum circuits for topological phases and anyonic
+systems in Qiskit, with a particular focus on ***Fibonacci anyons***. The circuits
+prepare string-net ground states, create and braid excitations, and
+***execute arbitrary braid words as logical gates***; they are run both in Qiskit Aer simulations
+and on ***real IBM Quantum hardware***. Together, these operations effectively emulate
+a topological quantum computer on conventional gate-based hardware. The circuit
+constructions are also validated using symbolic derivations in Mathematica and
+optimized for IBM Quantum systems with backend-aware transpilation.
 
 The circuits provide ingredients for studying non-Abelian encoding and error
 correction.
@@ -18,6 +19,7 @@ Other models included are:
 
 ## Contents <!-- omit from toc -->
 - [Fibonacci Anyons: Quantum Algorithms and Optimized Circuits](#fibonacci-anyons-quantum-algorithms-and-optimized-circuits)
+  - [IBM Quantum hardware implementation](#ibm-quantum-hardware-implementation)
   - [The Fibonacci String-net model](#the-fibonacci-string-net-model)
   - [Two circuit models](#two-circuit-models)
   - [Ground-state preparation](#ground-state-preparation)
@@ -37,11 +39,15 @@ Other models included are:
 
 ## Fibonacci Anyons: Quantum Algorithms and Optimized Circuits
 
-Below we will very briefly introduce the Fibonacci string-net model and its
-encoding in quantum circuits. Then we discuss ground-state preparation,
-anyon creation, transport, braiding, fusion and measurement before turning to
-logical braid words, circuit optimization and hardware-aware transpilation for
-IBM quantum processors.
+### IBM Quantum hardware implementation
+
+We implement the Levin–Wen Fibonacci string-net model on two different
+lattices: **(1)** a
+[three-plaquette lattice](fibonacci/models/levin_wen_lattice.py)
+for ground-state preparation, constraint measurements and ribbon braiding, and
+**(2)** a simpler
+[single-polygon lattice](fibonacci/models/topological_code.py)
+supporting a configurable number of anyon pairs and arbitrary braid words.
 
 <p align="center">
   <picture>
@@ -53,6 +59,32 @@ IBM quantum processors.
          width="900"/>
   </picture>
 </p>
+
+Both are implemented in Qiskit and have been executed on real IBM Quantum
+processors through Qiskit IBM Runtime. Hardware preparation uses backend-aware transpilation, compares automatic qubit placement with manually specified logical-to-physical layouts, and searches across multiple transpiler seeds.
+
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)"
+            srcset="docs/images/fibonacci/transpilation/transpilation_plaquette_b_layout_map_dark.svg">
+    <source media="(prefers-color-scheme: light)"
+            srcset="docs/images/fibonacci/transpilation/transpilation_plaquette_b_layout_map.svg">
+    <img src="docs/images/fibonacci/transpilation/transpilation_plaquette_b_layout_map.svg"
+         width="800"/>
+  </picture>
+</p>
+
+The best
+[transpiled circuits](fibonacci/transpiled_circuits) are saved and loaded by the
+hardware runners when available. Results from completed hardware runs are
+[stored](fibonacci/main_scripts/topological_code/data/topological_computations.jsonl),
+together with relevant metadata such as IBM backend, job ID, circuit costs and measurement
+outcomes. See
+[Circuit transpilation and optimization](#circuit-transpilation-and-optimization)
+for details.
+
+
+
 
 All the main scripts can be run as Python modules from the repository root using
 
@@ -578,20 +610,13 @@ python -m fibonacci.main_scripts.topological_code.ibm_backend_topology_generate_
 python -m fibonacci.main_scripts.levin_wen_lattice.ibm_backend_topology_generate_figures
 ```
 
-The opening summary figure shows a transpilation-cost comparison across braid
-words. The figure below shows the full-backend placements for the Levin–Wen
-plaquette-$B$ measurement circuit.
-
-<p align="center">
-  <picture>
-    <source media="(prefers-color-scheme: dark)"
-            srcset="docs/images/fibonacci/transpilation/transpilation_plaquette_b_layout_map_dark.svg">
-    <source media="(prefers-color-scheme: light)"
-            srcset="docs/images/fibonacci/transpilation/transpilation_plaquette_b_layout_map.svg">
-    <img src="docs/images/fibonacci/transpilation/transpilation_plaquette_b_layout_map.svg"
-         width="1000"/>
-  </picture>
-</p>
+Examples of the resulting cost comparison and full-backend placement map are
+shown in the earlier
+[hardware implementation](#ibm-quantum-hardware-implementation) section.
+Additional graphics can be found in the saved transpilation results for the
+[single-polygon model](fibonacci/transpiled_circuits/topological_code) and the
+[three-plaquette model](fibonacci/transpiled_circuits/levin_wen_lattice),
+including their backend-specific subfolders.
 
 ### Mathematica calculations
 
